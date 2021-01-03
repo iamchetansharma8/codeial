@@ -9,6 +9,9 @@ const homeController=require('../controllers/home_controller');
 
 router.get('/',homeController.home);
 
+// directing to users.js route from here
+router.use('/users',require('./users'));
+
 console.log('router loaded');
 
 module.exports=router;
