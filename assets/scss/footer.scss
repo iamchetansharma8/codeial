@@ -1,0 +1,22 @@
+$def-font: sans-serif;
+$bottom-color: cornsilk;
+$back-bottom: black;
+footer{
+    display: flex;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    background-color: $back-bottom;
+    color: $bottom-color;
+    font-family: $def-font;
+    #foot-links{
+        margin-left: 2rem;
+        div li{
+            list-style: none;
+            a{
+                text-decoration: none;
+                color: $bottom-color;
+            }
+        }
+    }
+}

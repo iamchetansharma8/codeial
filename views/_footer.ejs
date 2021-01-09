@@ -1,3 +1,15 @@
 <footer>
-    Page Footer
+    <div>
+        &copyChetanSharma. All rights reserved
+    </div>
+    <div id="foot-links">
+        <% if(locals.user){ %>
+            <div id="foot-l1">
+                <li> <a href="/"> Home </a> </li>
+            </div>
+            <div id="foot-l2">
+                <li> <a href="/users/profile"> <%=user.name%> </a> </li>
+            </div>
+        <% } %>
+    </div>
 </footer>

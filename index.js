@@ -13,6 +13,18 @@ const passportLocal=require('./config/passport-local-strategy');
 // importing MongoStore to preserve cookies even after server restart
 const MongoStore=require('connect-mongo')(session);
 
+// import sass-middleware
+const sassMiddleware=require('node-sass-middleware');
+
+// using sass middleware
+app.use(sassMiddleware({
+    src:'./assets/scss',
+    dest:'./assets/css',
+    debug:'true',
+    outputStyle:'extented',
+    prefix:'/css'
+}));
+
 // decode url
 app.use(express.urlencoded());
 
@@ -63,3 +75,6 @@ app.listen(port,function(err){
     }
     console.log(`Server running on port:${port}`);
 });
+
+// start mongodb
+// sudo systemctl start mongod

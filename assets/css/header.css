@@ -1,0 +1,21 @@
+#header-list {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  background-color: royalblue;
+  font-family: sans-serif;
+  color: cornsilk;
+  padding: .5rem; }
+  #header-list #header-head li {
+    font-size: 1.8rem;
+    font-weight: 800; }
+  #header-list #head-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    #header-list #head-links div li a {
+      color: cornsilk;
+      margin-right: 1rem;
+      font-family: sans-serif;
+      font-weight: 700;
+      text-decoration: none; }

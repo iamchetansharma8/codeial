@@ -1,0 +1,28 @@
+$def-font: sans-serif;
+$head-color: cornsilk;
+$head-back-color: royalblue;
+#header-list{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    background-color: $head-back-color;
+    font-family: $def-font;
+    color: $head-color;
+    padding: .5rem;
+    #header-head li{
+        font-size: 1.8rem;
+        font-weight: 800;
+    }
+    #head-links{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        div li a{
+            color: $head-color;
+            margin-right: 1rem;
+            font-family: $def-font;
+            font-weight: 700;
+            text-decoration: none;
+        }
+    }
+}

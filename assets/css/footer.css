@@ -1,0 +1,15 @@
+footer {
+  display: flex;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  background-color: black;
+  color: cornsilk;
+  font-family: sans-serif; }
+  footer #foot-links {
+    margin-left: 2rem; }
+    footer #foot-links div li {
+      list-style: none; }
+      footer #foot-links div li a {
+        text-decoration: none;
+        color: cornsilk; }
