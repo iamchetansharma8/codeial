@@ -12,6 +12,9 @@ router.get('/',homeController.home);
 // directing to users.js route from here
 router.use('/users',require('./users'));
 
+// directing to posts.js router
+router.use('/posts',require('./posts'));
+
 console.log('router loaded');
 
 module.exports=router;
