@@ -7,7 +7,10 @@ const usersController=require('../controllers/users_controller');
 const passport=require('passport');
 const { pass } = require('../config/mongoose');
 
-router.get('/profile',passport.checkAuthentication,usersController.profile);
+router.get('/profile/:id',passport.checkAuthentication,usersController.profile);
+
+// update profile
+router.post('/update/:id',passport.checkAuthentication,usersController.update);
 
 // directing to posts.js router for /users/posts
 

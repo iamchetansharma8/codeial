@@ -15,6 +15,9 @@ router.use('/users',require('./users'));
 // directing to posts.js router
 router.use('/posts',require('./posts'));
 
+// directing to comments.js router
+router.use('/comments',require('./comments'));
+
 console.log('router loaded');
 
 module.exports=router;

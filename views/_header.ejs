@@ -7,7 +7,7 @@
         <section id="head-links">
             <% if(locals.user) {%>
                 <div>
-                    <li> <a href="/users/profile"> <%=user.name%> </a> </li>
+                    <li> <a href="/users/profile/<%=user.id%>"> <%=user.name%> </a> </li>
                 </div>
                 <div>
                     <li>

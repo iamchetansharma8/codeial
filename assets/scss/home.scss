@@ -1,0 +1,21 @@
+$def-font: sans-serif;
+$h4-size: 1.5rem;
+#home-container{
+    font-family: $def-font;
+    display: flex;
+    #feed-posts{
+        width: 70vw;
+        padding: 0vh 1vw 0vh 1vw;
+        h4{
+            font-size: $h4-size;
+        }
+    }
+    #user-freinds{
+        width: 25vw;
+        padding: 0vh 1vw 0vh 1vw;
+        border-left: 1px solid darkgrey;
+        h4{
+            font-size: $h4-size;
+        }
+    }
+}

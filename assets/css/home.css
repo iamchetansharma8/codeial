@@ -1,0 +1,14 @@
+#home-container {
+  font-family: sans-serif;
+  display: flex; }
+  #home-container #feed-posts {
+    width: 70vw;
+    padding: 0vh 1vw 0vh 1vw; }
+    #home-container #feed-posts h4 {
+      font-size: 1.5rem; }
+  #home-container #user-freinds {
+    width: 25vw;
+    padding: 0vh 1vw 0vh 1vw;
+    border-left: 1px solid darkgrey; }
+    #home-container #user-freinds h4 {
+      font-size: 1.5rem; }
