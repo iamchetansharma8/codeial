@@ -13,11 +13,21 @@ module.exports.create=function(req,res){
             },function(err,comment){
                 // handle error
                 if(err){
-                    console.log('Error in sending comment to db or saving it in post comments[]');
-                    return;
+                    req.flash('error',err);
+                    return res.redirect('/');
                 }
                 post.comments.push(comment);
                 post.save();
+                if(req.xhr){
+                    console.log('hj');
+                    return res.status(200).json({
+                        data:{
+                            comment:comment
+                        },
+                        message:"Comment Created!"
+                    });
+                }
+                req.flash('success','Comment added!');
                 res.redirect('/');
             });
         }
@@ -30,6 +40,7 @@ module.exports.destroy=function(req,res){
             let postId=comment.post;
             comment.remove();
             Post.findByIdAndUpdate(postId,{$pull:{comments:req.params.id}},function(err,post){
+                req.flash('success','Comment deleted!');
                 return res.redirect('back');
             });
         }

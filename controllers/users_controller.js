@@ -16,11 +16,13 @@ module.exports.posts=function(req,res){
 module.exports.update=function(req,res){
     if(req.user.id==req.params.id){
         User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+            req.flash('success','username and email updated successfully');
             return res.redirect('back');
         });
     }
     else{
-        res.status(401).send('Unauthorised');
+        req.flash('error','You are unauthorised to change username or password');
+        return res.redirect('back');
     }
 }
 
@@ -71,11 +73,13 @@ module.exports.create=function(req,res){
 
 // sign in and create a session for the user
 module.exports.createSession=function(req,res){
+    req.flash('success','Logged In successfully');
     res.redirect('/');
 }
 
 // destroy session action
 module.exports.destroySession=function(req,res){
     req.logout();
+    req.flash('success','You have looged out!');
     return res.redirect('/');
 }
