@@ -7,18 +7,19 @@
  <%=i.user.name %>
  <% if(locals.user) {%>
     <div class="post-comments-form">
-        <form action="/comments/create" method="POST" id="new-comment-form">
+        <form action="/comments/create" method="POST" id="<%=i._id%>-comment-form">
             <input type="text" name="content" placeholder="Add a Comment.....">
             <input type="hidden" name="post" value="<%=i._id%>">
             <input type="submit" value="Add Comment">
         </form>
     </div>
  <% } %>
- <div>
+ <div class=post-comments-list>
+    <ul id="post-comments-<%=i._id%>">
      <% for(comment of i.comments){ %>
-        <ul>
-            <%- include('_comment') -%>
-        </ul>
+        
+        <%- include('_comment') -%>
     <% } %>
+    </ul>
  </div>
 </li>
