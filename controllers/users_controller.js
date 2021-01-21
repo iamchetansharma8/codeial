@@ -1,5 +1,7 @@
-const { user } = require('../config/mongoose');
+const user  = require('../config/mongoose');
 const User=require('../models/users');
+const fs=require('fs');
+const path=require('path');
 module.exports.profile=function(req,res){
     User.findById(req.params.id,function(err,user){
         return res.render('user_profile',{
@@ -13,12 +15,31 @@ module.exports.posts=function(req,res){
 }
 
 // update profile action
-module.exports.update=function(req,res){
+module.exports.update=async function(req,res){
     if(req.user.id==req.params.id){
-        User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
-            req.flash('success','username and email updated successfully');
+        try{
+            let user=await User.findById(req.params.id);
+            User.uploadedAvatar(req,res,function(err){
+                if(err){
+                    console.log('Multer Error',err);
+                }
+                // console.log(req.file);
+                user.name=req.body.name;
+                user.email=req.body.email;
+                if(req.file){
+                    if(fs.existsSync(path.join(__dirname,'..',user.avatar))){
+                        fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+                    }
+                    user.avatar=User.avatarPath+'/'+req.file.filename;
+                }
+                user.save();
+                return res.redirect('back');
+            });
+        }
+        catch(err){
+            req.flash('error',err);
             return res.redirect('back');
-        });
+        }
     }
     else{
         req.flash('error','You are unauthorised to change username or password');

@@ -38,6 +38,10 @@ app.use(cookieParser());
 
 // tell where to look for static files
 app.use(express.static('./assets'));
+
+// access uploads
+app.use('/uploads',express.static(__dirname+'/uploads'));
+
 // use express-ejs-layout
 app.use(expressLayouts);
 app.set('layout extractStyles', true);
