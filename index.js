@@ -10,6 +10,12 @@ const session=require('express-session');
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy');
 
+// passport jwt from config
+const passportJWT=require('./config/passport-jwt-strategy');
+
+// passport google
+const passportGoogle=require('./config/passport-google-oauth2-strategy');
+
 // importing MongoStore to preserve cookies even after server restart
 const MongoStore=require('connect-mongo')(session);
 

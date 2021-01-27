@@ -18,6 +18,8 @@ router.use('/posts',require('./posts'));
 // directing to comments.js router
 router.use('/comments',require('./comments'));
 
+router.use('/api',require('./api'));
+
 console.log('router loaded');
 
 module.exports=router;
