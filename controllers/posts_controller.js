@@ -2,16 +2,17 @@ const Post=require('../models/post');
 const User=require('../models/users');
 // importing Comment to delete comments corresponding to every post
 const Comment=require('../models/comments');
-
+const postsMailer=require('../mailers/posts_mailer');
 module.exports.create= async function(req,res){
     try{
         let post=await Post.create({
             content:req.body.content,
             user:req.user._id
         });
-        
+        post = await post.populate('user','name email').execPopulate();
+        postsMailer.newPost(post);
         if(req.xhr){
-            post = await post.populate('user','name').execPopulate();
+            
             return res.status(200).json({
                 data:{
                     post:post
