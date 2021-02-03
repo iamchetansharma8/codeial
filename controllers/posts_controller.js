@@ -2,6 +2,7 @@ const Post=require('../models/post');
 const User=require('../models/users');
 // importing Comment to delete comments corresponding to every post
 const Comment=require('../models/comments');
+const Like=require('../models/like');
 const postsMailer=require('../mailers/posts_mailer');
 const queue=require('../config/kue');
 const postEmailWorker=require('../workers/post_email_worker');
@@ -44,6 +45,12 @@ module.exports.destroy= async function(req,res){
         let post=await Post.findById(req.params.id);
         // req.user._id is replace by .id as this gives us a string value to compare here
         if(post.user==req.user.id){
+
+            // CHANGE :: delete the associated likes for the post and all its comments' likes too
+            await Like.deleteMany({likeable: post, onModel: 'Post'});
+            await Like.deleteMany({_id: {$in: post.comments}});
+
+
             post.remove();
             await Comment.deleteMany({Post:req.params.id});
             // only err as single argument as comments have been deleted

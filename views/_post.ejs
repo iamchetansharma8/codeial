@@ -5,6 +5,13 @@
  <%=i.content %>
 <br>
  <%=i.user.name %>
+ <% if(locals.user){%>
+    <a class="toggle-like-button" data-likes="<%=i.likes.length%>" href="/likes/toggle/?id=<%=i._id%>&type=Post">
+        <%=i.likes.length%>Likes
+    </a>
+<%}else{%>
+    <%=i.likes.length%>Likes
+<%}%>
  <% if(locals.user) {%>
     <div class="post-comments-form">
         <form action="/comments/create" method="POST" id="<%=i._id%>-comment-form">

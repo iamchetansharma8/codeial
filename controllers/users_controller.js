@@ -27,9 +27,12 @@ module.exports.update=async function(req,res){
                 user.name=req.body.name;
                 user.email=req.body.email;
                 if(req.file){
-                    if(fs.existsSync(path.join(__dirname,'..',user.avatar))){
+                    console.log(fs.existsSync(path.join(__dirname,'..',user.avatar)));
+                   if(fs.existsSync(path.join(__dirname,'..',user.avatar))){
                         fs.unlinkSync(path.join(__dirname,'..',user.avatar));
                     }
+                    console.log(__dirname);
+                    console.log(user.avatar);
                     user.avatar=User.avatarPath+'/'+req.file.filename;
                 }
                 user.save();

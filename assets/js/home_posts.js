@@ -16,6 +16,10 @@
                     deletePost($(' .delete-post-button',newPost));
 
                     new PostComments(data.data.post._id);
+
+                    // CHANGE :: enable the functionality of the toggle like button on the new post
+                    new ToggleLike($(' .toggle-like-button', newPost));
+                    
                     new Noty({
                         theme: 'relax',
                         text: "Post published!",
@@ -40,7 +44,13 @@
          ${post.content} 
         <br>
          ${post.user.name}
-        
+         <small>
+                            
+         <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
+             0 Likes
+         </a>
+     
+         </small>
             <div class="post-comments-form">
                 <form action="/comments/create" method="POST" id="${post._id}-comment-form">
                     <input type="text" name="content" placeholder="Add a Comment.....">
