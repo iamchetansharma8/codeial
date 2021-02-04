@@ -2,12 +2,20 @@ const user  = require('../config/mongoose');
 const User=require('../models/users');
 const fs=require('fs');
 const path=require('path');
-module.exports.profile=function(req,res){
+/*module.exports.profile=function(req,res){
     User.findById(req.params.id,function(err,user){
+        user.populate('friendships')
         return res.render('user_profile',{
             title:"Users's profile",
             profile_user:user
         });
+    });
+}*/
+module.exports.profile=async function(req,res){
+    let p_user=await User.findById(req.params.id).populate('friendships');
+    return res.render('user_profile',{
+        title:"User's profile",
+        profile_user:p_user
     });
 }
 module.exports.posts=function(req,res){
@@ -27,7 +35,7 @@ module.exports.update=async function(req,res){
                 user.name=req.body.name;
                 user.email=req.body.email;
                 if(req.file){
-                    console.log(fs.existsSync(path.join(__dirname,'..',user.avatar)));
+                    // console.log(fs.existsSync(path.join(__dirname,'..',user.avatar)));
                    if(fs.existsSync(path.join(__dirname,'..',user.avatar))){
                         fs.unlinkSync(path.join(__dirname,'..',user.avatar));
                     }

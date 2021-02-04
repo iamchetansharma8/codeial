@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="/css/profile.css">
 <h1>users profile</h1>
-<img src="<%=user.avatar%>" alt="<%=user.name%>" width="150">
+<img src="<%=profile_user.avatar%>" alt="<%=profile_user.name%>" width="150">
 <% if(user.id==profile_user.id){%>
     <form action="/users/update/<%=profile_user.id%>" enctype="multipart/form-data" method="POST">
         <input type="text" name="name" placeholder="Your name" value="<%=profile_user.name%>" required>
@@ -10,4 +11,19 @@
 <%} else{%>
     <p> <%= profile_user.name %> </p>
     <p> <%= profile_user.email %> </p>
+    <% let make=true %>
+    <% for(let i of profile_user.friendships){ %>
+        <% if(i.from_user==user.id) {%>
+            <%make=false;%>
+            <%break;%>
+        <% } %>
+    <% } %>
+    <% if(make){%>
+        <form action="/users/be-friend/?f_id=<%=profile_user._id%>" method="POST">
+            <button type="submit">Be Friends+</button>
+        </form>
+        <!--<button><a class="arem" href="/users/be-friend/?f-id=<%=profile_user._id%>">Be Friends+</a></button>-->
+    <%}else{%>
+        <button><a class="arem" href="">Unfriend-</a></button>
+        <%}%>
     <%}%>

@@ -16,13 +16,21 @@
     </section>
 </section>
 <% } %>
-<section id="user-freinds">
-    <h4>Freinds</h4>
+<section id="all-users">
+    <h4>All Users</h4>
     <% for(u of all_users){ %>
         <p>
             <a href="/users/profile/<%=u.id%>"><%=u.name%></a>
         </p>
     <%}%>
+    <section id="user-friends">
+        <h4>Friends</h4>
+       <% for(it of cur_user.friendslist){%>
+            <p>
+                <a href="/users/profile/<%=it.id%>"><%=it.name%></a>
+            </p>
+    <%}%>
+    </section>
 </section>
 </section>
 <script src="/js/home_comments.js"></script>
