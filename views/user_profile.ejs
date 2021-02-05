@@ -15,7 +15,7 @@
     <% let frsid %>
     <% for(let i of profile_user.friendships){ %>
         <% if(i.from_user==user.id||i.to_user==user.id) {%>
-            <% frsid=i._id %>
+            <%frsid=i._id%>
             <%make=false;%>
             <%break;%>
         <% } %>
@@ -26,7 +26,6 @@
         </form>
         <!--<button><a class="arem" href="/users/be-friend/?f-id=<%=profile_user._id%>">Be Friends+</a></button>-->
     <%}else{%>
-        <%=frsid%>
         <form action="/users/un-friend/?f_id=<%=profile_user._id%>&frsid=<%=frsid%>" method="POST">
             <button type="submit">Unfriend-</button>
         </form>

@@ -8,6 +8,9 @@ module.exports.home=async function(req,res){
     
     // populating the user of each post, note that Post schema has user in it
     try{
+        if(!req.user){
+            return res.redirect('/users/sign-in');
+        }
         let posts=await Post.find({})
         .sort('-createdAt')
         .populate('user')
@@ -20,6 +23,7 @@ module.exports.home=async function(req,res){
             path:'likes'
         }
     }).populate('likes');
+
         let users=await User.find({}).populate('friendships');
         let cur_user = await User.findById(req.user._id).populate('friendslist', 'name email _id');
         // let cur_user=await User.findById(req.user._id).populate({
@@ -39,7 +43,7 @@ module.exports.home=async function(req,res){
     }
     catch(err){
         console.log('Error',err);
-        return;
+        return res.redirect('/users/sign-in');
     }
 }
     

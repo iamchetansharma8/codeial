@@ -38,6 +38,7 @@ module.exports.beFriend=async function(req,res){
 }
 module.exports.unFriend=async function(req,res){
     try{
+        console.log(req.query.frsid);
         let first_person=await User.findByIdAndUpdate(req.user._id,{$pull:{friendships:req.query.frsid,friendslist:req.query.f_id}});
         let sec_person=await User.findByIdAndUpdate(req.query.f_id,{$pull:{friendships:req.query.frsid,friendslist:req.user._id}});
         let friendship=await Friendship.findById(req.query.frsid);
