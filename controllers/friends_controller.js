@@ -1,4 +1,5 @@
 const Friendship=require('../models/friendship');
+const { find } = require('../models/users');
 const User=require('../models/users');
 module.exports.beFriend=async function(req,res){
     try{
@@ -32,6 +33,20 @@ module.exports.beFriend=async function(req,res){
     }
     catch(err){
         console.log(err);
+        return res.redirect('back');
+    }
+}
+module.exports.unFriend=async function(req,res){
+    try{
+        let first_person=await User.findByIdAndUpdate(req.user._id,{$pull:{friendships:req.query.frsid,friendslist:req.query.f_id}});
+        let sec_person=await User.findByIdAndUpdate(req.query.f_id,{$pull:{friendships:req.query.frsid,friendslist:req.user._id}});
+        let friendship=await Friendship.findById(req.query.frsid);
+        friendship.remove();
+
+        return res.redirect('back');
+    }
+    catch(err){
+        console.log('Error in deleteing friend',err);
         return res.redirect('back');
     }
 }

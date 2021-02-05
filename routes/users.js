@@ -38,5 +38,6 @@ router.get('/auth/google/callback',passport.authenticate('google',{failureRedire
 
 
 router.post('/be-friend',passport.checkAuthentication,friendsController.beFriend);
+router.post('/un-friend',passport.checkAuthentication,friendsController.unFriend);
 
 module.exports=router;
